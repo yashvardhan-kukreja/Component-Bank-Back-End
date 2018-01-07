@@ -82,7 +82,7 @@ router.post('/getAllComponents', function(req, res){
 //Route for getting the list of all the user issuing a specific component and also the details of the component
 router.post('/getIssuers', function(req, res){
     var compId = req.body.id; //Object ID of the component for which issuers are to be found
-    Transaction.find({componentId:compId, returned:"2"}).populate({path:'memberId', select:['name', 'regno', 'email', 'phoneno']}).exec(function(err, outputTransactions){
+    Transaction.find({componentId:compId, returned:"0"}).populate({path:'memberId', select:['name', 'regno', 'email', 'phoneno']}).exec(function(err, outputTransactions){
         if (err){
             res.json({success: false, message: "An error occured"});
         } else {

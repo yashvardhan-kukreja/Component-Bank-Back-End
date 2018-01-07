@@ -20,14 +20,10 @@ var componentSchema = new mongoose.Schema({
 
 componentSchema.pre('save', function(next){
     var component = this;
-    if (err)
-        return next(err);
-    else {
         if (component.quantity<0)
             return next((new Error("Quantity of component going below 0")));
         else
             next();
-    }
 });
 
 module.exports = mongoose.model('Component', componentSchema, "components");
