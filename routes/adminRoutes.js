@@ -90,6 +90,7 @@ router.post('/approve', function(req, res){
                                     res.json({success: false, message: "Component quantity going below 0"});
                                 } else {
                                     outputTransaction.returned = "0";
+                                    outputTransaction.date = Date.now();
                                     outputTransaction.save(function(err){
                                         if (err){
                                             console.log(err);
@@ -122,7 +123,7 @@ router.post('/approve', function(req, res){
 //Route for declaring a component as returned
 router.post('/return', function(req, res){
     var transId = req.body.id;
-    Transaction.findOneAndUpdate({_id:transId, returned:"0"}, {returned:"1"}, function(err, outputTransaction){
+    Transaction.findOneAndUpdate({_id:transId, returned:"0"}, {returned:"1", date: Date.now()}, function(err, outputTransaction){
         if (err){
             console.log(err);
             res.json({success: false, message: "An error occured"});
