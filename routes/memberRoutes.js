@@ -86,7 +86,6 @@ router.post('/getIssuers', function(req, res){
         if (err){
             res.json({success: false, message: "An error occured"});
         } else {
-            console.log(outputTransactions);
             Component.findOne({_id:compId}, function(err, outputComponent){
                 if (err){
                     console.log(err);

@@ -49,6 +49,18 @@ router.post('/deleteComponent', function(req, res){
     });
 });
 
+router.post('/deleteRequest', function(req, res){
+    var id = req.body.id; //Transaction id corresponding to the request
+    Transaction.findOneAndRemove({_id:id, returned:"2"}, function(err, outputTransaction){
+        if (err){
+            console.log(err);
+            res.json({success: false, message: "An error occured"});
+        } else {
+            res.json({success: true, message:"Request deleted successfully"});
+        }
+    });
+});
+
 
 //Route for approving the request of an issued component
 router.post('/approve', function(req, res){
@@ -182,7 +194,8 @@ router.post('/:route', function(req, res){
     if (!(returnedStatus === "")){
         Transaction.find({returned: returnedStatus}).populate('memberId').exec(function(err, outputTransactions){
             if (err){
-                res.json({success: false, message:"An error occured"});
+                console.log(err);
+                res.json({success: false, message:"An error occured", error: err});
             } else {
                 res.json({success: true, message:"Listed all the respective users", output: outputTransactions});
             }
