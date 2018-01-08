@@ -5,11 +5,16 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var bcrypt = require('bcrypt-nodejs');
+var Regex = require('regex');
 var Member = require('../models/member');
 var Transaction = require('../models/transaction');
 var authenticate = require('../authenticate');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+
+var regnoRegex = new Regex(/^[1-2]{1}[4-9]{1}[A-Z]{3}[0-9]{4}$/);
+var emailRegex = new Regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/);
+var phonenoRegex = new Regex(/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/);
 
 //Route for registering a user
 router.post('/register', function(req, res){
@@ -21,17 +26,25 @@ router.post('/register', function(req, res){
         phoneno: req.body.phoneno
     });
 
-    newMember.save(function(err){
-        if (err){
-            console.log(err);
-            if (err.code == 11000)      // Error code 11000 means that error occured due to duplication of some value
-                res.json({success: false, message: "A user with same email or reg num already exists"});
-            else
-                res.json({success: false, message: "An error occured"});
-        } else {
-            res.json({success: true, message: "Registered successfully"});
-        }
-    });
+    if (!regnoRegex.test(newMember.regno)){
+        res.json({success: false, message: "Enter a valid registration number"});
+    } else if (!emailRegex.test(newMember.email)){
+        res.json({success: false, message: "Enter a valid E-mail ID"});
+    } else if (!phonenoRegex.test(newMember.phoneno)){
+        res.json({success: false, message: "Enter a valid phone number"});
+    } else {
+        newMember.save(function(err){
+            if (err){
+                console.log(err);
+                if (err.code == 11000)      // Error code 11000 means that error occured due to duplication of some value
+                    res.json({success: false, message: "A user with same email or reg num already exists"});
+                else
+                    res.json({success: false, message: "An error occured"});
+            } else {
+                res.json({success: true, message: "Registered successfully"});
+            }
+        });
+    }
 });
 
 //Route for authenticating a user
