@@ -32,6 +32,8 @@ router.post('/register', function(req, res){
         res.json({success: false, message: "Enter a valid E-mail ID"});
     } else if (!phonenoRegex.test(newMember.phoneno)){
         res.json({success: false, message: "Enter a valid phone number"});
+    } else if (newMember.password.length < 6 || newMember.password.contains(" ")){
+        res.json({success:false, message: "Password must be at least 6 characters long and it cannot have any spaces"});
     } else {
         newMember.save(function(err){
             if (err){
