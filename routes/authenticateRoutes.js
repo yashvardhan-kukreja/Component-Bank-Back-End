@@ -27,7 +27,7 @@ var phonenoRegex = new Regex(/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}
         phoneno: req.body.phoneno
     });
 
-    if (!regnoRegex.test(newMember.regno)){
+    if (!regnoRegex.test(req.body.regno)){
         res.json({success: false, message: "Enter a valid registration number"});
     } else if (!emailRegex.test(newMember.email)){
         res.json({success: false, message: "Enter a valid E-mail ID"});
