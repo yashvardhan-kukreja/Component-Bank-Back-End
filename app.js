@@ -14,8 +14,7 @@ var port = process.env.PORT || 8000;
 
 
 //mongodb://yashvardhan:yashvardhan@ds163806.mlab.com:63806/ieeecomponentbank => CLOUD
-//mongodb://localhost:27017/componentbank                                     => LOCALHOST
-
+//mongodb://localhost:27017/componentbank
 
 var db = "mongodb://yashvardhan:yashvardhan@ds163806.mlab.com:63806/ieeecomponentbank";
 //var db = "mongodb://localhost:27017/componentbank";
