@@ -12,12 +12,13 @@ var authenticate = require('../authenticate');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
+
+//Route for registering a user
+router.post('/register', function(req, res){
 var regnoRegex = new Regex(/^[1-2]{1}[4-9]{1}[A-Z]{3}[0-9]{4}$/);
 var emailRegex = new Regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/);
 var phonenoRegex = new Regex(/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/);
 
-//Route for registering a user
-router.post('/register', function(req, res){
     var newMember = new Member({
         name: req.body.name,
         regno: req.body.regno,
