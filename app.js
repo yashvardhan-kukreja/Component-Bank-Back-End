@@ -13,10 +13,10 @@ var authenticateRoutes = require('./routes/authenticateRoutes');
 var port = process.env.PORT || 8000;
 
 
-//mongodb://yashvardhan:yashvardhan@ds163806.mlab.com:63806/ieeecomponentbank => CLOUD
+//mongodb://ieee:ieee@ds247587.mlab.com:47587/componentbank => CLOUD
 //mongodb://localhost:27017/componentbank
 
-var db = "mongodb://yashvardhan:yashvardhan@ds163806.mlab.com:63806/ieeecomponentbank";
+var db = "mongodb://ieee:ieee@ds247587.mlab.com:47587/componentbank";
 //var db = "mongodb://localhost:27017/componentbank";
 mongoose.connect(db, function(err){
     if (err)
