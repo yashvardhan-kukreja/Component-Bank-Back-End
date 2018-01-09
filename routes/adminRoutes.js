@@ -65,13 +65,13 @@ router.post('/deleteRequest', function(req, res){
 //Route for authorizing a member
 router.post('/authorize', function(req, res){
     var regno = req.body.regno;
-    Member.findOneAndUpdate({regno: regno}, {authorized:true}, function(err, outputMember){
+    Member.findOneAndUpdate({regno: regno, authorized:false}, {authorized:true}, function(err, outputMember){
         if (err){
             console.log(err);
             res.json({success: false, message: "An error occured"});
         } else {
             if (!outputMember)
-                res.json({success: false, message: "Please enter the valid registration number"});
+                res.json({success: false, message: "Please enter the valid registration number of a user who is not authorised"});
             else
                 res.json({success: true, message: "User authorized successfully"});
         }

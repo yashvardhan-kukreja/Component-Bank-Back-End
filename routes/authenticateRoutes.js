@@ -66,7 +66,7 @@ router.post('/login', function(req, res){
                     res.json({success: false, message: "Wrong password entered"});
                 else{
                     if (outputMember.authorized == false){
-                        res.json({success: false, message: "Currently you are not authorized to access component bank"});
+                        res.json({success: false, message: "Currently you are not authorized to access component bank. Make sure you are a part of IEEE VIT Students chapter"});
                     } else {
                         var token = jwt.sign(JSON.parse(JSON.stringify(outputMember)), 'secret');
                         res.header("Set-Cookie","x-access-token="+token);
