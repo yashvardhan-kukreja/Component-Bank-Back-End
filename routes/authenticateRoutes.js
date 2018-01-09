@@ -65,28 +65,32 @@ router.post('/login', function(req, res){
                 if (!bcrypt.compareSync(pass, outputMember.password))
                     res.json({success: false, message: "Wrong password entered"});
                 else{
-                    var token = jwt.sign(JSON.parse(JSON.stringify(outputMember)), 'secret');
-                    res.header("Set-Cookie","x-access-token="+token);
+                    if (outputMember.authorized == false){
+                        res.json({success: false, message: "Currently you are not authorized to access component bank"});
+                    } else {
+                        var token = jwt.sign(JSON.parse(JSON.stringify(outputMember)), 'secret');
+                        res.header("Set-Cookie","x-access-token="+token);
 
-                    //Finding all the transactions with returned != "1"
-                    Transaction.find({memberId: outputMember._id, returned:{$ne:"1"}}, function(err, outputTransactions){
-                        if (err){
-                            console.log(err);
-                            res.json({success: false, message: "An error occured"});
-                        } else {
-                            var issued = 0;
-                            var requested = 0;
-                            for (var i=0;i<outputTransactions.length;i++){
-                                if (outputTransactions[i].returned === '0')
-                                    issued += parseInt(outputTransactions[i].quantity);
-                                else
-                                    requested += parseInt(outputTransactions[i].quantity);
+                        //Finding all the transactions with returned != "1"
+                        Transaction.find({memberId: outputMember._id, returned:{$ne:"1"}}, function(err, outputTransactions){
+                            if (err){
+                                console.log(err);
+                                res.json({success: false, message: "An error occured"});
+                            } else {
+                                var issued = 0;
+                                var requested = 0;
+                                for (var i=0;i<outputTransactions.length;i++){
+                                    if (outputTransactions[i].returned === '0')
+                                        issued += parseInt(outputTransactions[i].quantity);
+                                    else
+                                        requested += parseInt(outputTransactions[i].quantity);
+                                }
+                                setTimeout(function(){
+                                    res.json({success: true, message:"User authenticated successfully", name: outputMember.name, regno: outputMember.regno, email: outputMember.email, phoneno: outputMember.phoneno, isAdmin: outputMember.isAdmin, issuedComponents:issued, requestedComponents: requested, token: token});
+                                }, 200);
                             }
-                            setTimeout(function(){
-                                res.json({success: true, message:"User authenticated successfully", name: outputMember.name, regno: outputMember.regno, email: outputMember.email, phoneno: outputMember.phoneno, isAdmin: outputMember.isAdmin, issuedComponents:issued, requestedComponents: requested, token: token});
-                            }, 200);
-                        }
-                    });
+                        });
+                    }
                 }
             }
         }

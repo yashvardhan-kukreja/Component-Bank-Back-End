@@ -4,6 +4,7 @@
 
 var mongoose = require('mongoose');
 var express = require('express');
+var Member = require('../models/member');
 var Component = require('../models/component');
 var Transaction = require('../models/transaction');
 var authenticate = require('../authenticate');
@@ -57,6 +58,22 @@ router.post('/deleteRequest', function(req, res){
             res.json({success: false, message: "An error occured"});
         } else {
             res.json({success: true, message:"Request deleted successfully"});
+        }
+    });
+});
+
+//Route for authorizing a member
+router.post('/authorize', function(req, res){
+    var regno = req.body.regno;
+    Member.findOneAndUpdate({regno: regno}, {authorized:true}, function(err, outputMember){
+        if (err){
+            console.log(err);
+            res.json({success: false, message: "An error occured"});
+        } else {
+            if (!outputMember)
+                res.json({success: false, message: "Please enter the valid registration number"});
+            else
+                res.json({success: true, message: "User authorized successfully"});
         }
     });
 });

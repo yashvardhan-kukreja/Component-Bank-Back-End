@@ -29,6 +29,10 @@ var MemberSchema = new mongoose.Schema({
         type:String,
         required: true
     },
+    authorized:{
+        type:Boolean,
+        default: false
+    },
     isAdmin:{
         type:String,
         default:"0" // 0 means that the user is a normal user. 1 means that the user is an ADMIN
