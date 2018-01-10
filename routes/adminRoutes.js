@@ -78,6 +78,18 @@ router.post('/authorize', function(req, res){
     });
 });
 
+//Route for the list of unauthorized users
+router.post('/unauthorizedUsers', function(req, res){
+    Member.find({authorized:false}, function(err, outputMembers){
+        if (err){
+            console.log(err);
+            res.json({success:false, message:"An error occured"});
+        } else {
+            res.json({success:true, message:"Unauthorized users listed", users:outputMembers});
+        }
+    });
+});
+
 
 //Route for approving the request of an issued component
 router.post('/approve', function(req, res){
