@@ -8,7 +8,7 @@ var jwt = require('jsonwebtoken');
 function checkToken(req, res, next){
     var token = req.body.token || req.headers['x-access-token'];
     if (token) {
-        jwt.verify(token, 'secret',function(err, decoded){
+        jwt.verify(token, 'secret', function(err, decoded){
             if (err){
                 return res.json({success: false, message: "An error occured"});
             } else {

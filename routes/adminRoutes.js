@@ -2,7 +2,6 @@
  * Created by Yash 1300 on 29-12-2017.
  */
 
-var mongoose = require('mongoose');
 var express = require('express');
 var Member = require('../models/member');
 var Component = require('../models/component');
@@ -50,6 +49,8 @@ router.post('/deleteComponent', function(req, res){
     });
 });
 
+
+//Route for deleting a request
 router.post('/deleteRequest', function(req, res){
     var id = req.body.id; //Transaction id corresponding to the request
     Transaction.findOneAndRemove({_id:id, returned:"2"}, function(err, outputTransaction){
