@@ -2,14 +2,10 @@
  * Created by Yash 1300 on 07-01-2018.
  */
 
-var mongoose = require('mongoose');
 var express = require('express');
-var bcrypt = require('bcrypt-nodejs');
 var Member = require('../models/member');
-var Transaction = require('../models/transaction');
 var authenticate = require('../authenticate');
 var router = express.Router();
-var jwt = require('jsonwebtoken');
 
 
 //Route for registering a user

@@ -1,9 +1,7 @@
 /**
  * Created by Yash 1300 on 29-12-2017.
  */
-var mongoose = require('mongoose');
 var express = require('express');
-var bcrypt = require('bcrypt-nodejs');
 var Member = require('../models/member');
 var Component = require('../models/component');
 var Transaction = require('../models/transaction');
