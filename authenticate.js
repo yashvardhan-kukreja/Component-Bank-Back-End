@@ -8,6 +8,7 @@ var bcrypt = require('bcrypt-nodejs');
 var Member = require('./models/member');
 var Transaction = require('./models/transaction');
 
+// Creating the function for verifying a token
 function checkToken(req, res, next){
     var token = req.body.token || req.headers['x-access-token'];
     if (token) {
@@ -24,6 +25,7 @@ function checkToken(req, res, next){
     }
 }
 
+// Creating the function for login authentication
 function authenticate(req, res, next){
     var email = req.body.email; // Email of the user
     var pass = req.body.password; //Password entered by the user
@@ -42,6 +44,8 @@ function authenticate(req, res, next){
                     if (outputMember.authorized == false){
                         return res.json({success: false, message: "Currently you are not authorized to access component bank. Make sure you are a part of IEEE VIT Students chapter"});
                     } else {
+
+                        // Creating a token and assigning it to header
                         var token = jwt.sign(JSON.parse(JSON.stringify(outputMember)), 'secret');
                         res.header("Set-Cookie","x-access-token="+token);
 
@@ -71,4 +75,5 @@ function authenticate(req, res, next){
     });
 }
 
+// Exporting the functions
 module.exports = {authenticate: authenticate, checkToken: checkToken};

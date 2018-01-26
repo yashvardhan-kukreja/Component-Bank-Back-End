@@ -10,6 +10,8 @@ var router = express.Router();
 
 //Route for registering a user
 router.post('/register', function(req, res){
+
+    // Initialising the regexes for regno, email and phoneno
     var regnoRegex = /^[1-2]{1}[4-9]{1}[A-Z]{3}[0-9]{4}$/;
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     var phonenoRegex = /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/;
@@ -22,6 +24,7 @@ router.post('/register', function(req, res){
         phoneno: req.body.phoneno
     });
 
+    // Comparing the regex with values in the request body
     if (!regnoRegex.test(req.body.regno)){
         res.json({success: false, message: "Enter a valid registration number"});
     } else if (!emailRegex.test(newMember.email)){
