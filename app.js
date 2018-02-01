@@ -1,18 +1,18 @@
 /**
  * Created by Yash 1300 on 29-12-2017.
  */
-var mongoose = require('mongoose');
-var express = require('express');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var app = express();
-var memberRoutes = require('./routes/memberRoutes');
-var adminRoutes = require('./routes/adminRoutes');
-var authenticateRoutes = require('./routes/authenticateRoutes');
+const mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const app = express();
+const memberRoutes = require('./routes/memberRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const authenticateRoutes = require('./routes/authenticateRoutes');
 
-var port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000;
 
-var db = "mongodb://ieee:ieee@ds247587.mlab.com:47587/componentbank";
+const db = "mongodb://ieee:ieee@ds247587.mlab.com:47587/componentbank";
 
 // Connecting the database and making sure that the server runs only if the database connects successfully
 mongoose.connect(db, function(err){
