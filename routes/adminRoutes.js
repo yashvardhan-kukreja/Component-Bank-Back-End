@@ -203,6 +203,11 @@ router.post('/addComponents', function(req, res) {
             if (!outputComponent)
                 res.json({success: false, message: "No such component exists"});
             else {
+                if (outputComponent.quantity < 0){
+                    res.json({success:false, message:"Quantity of components going below 0"});
+                    outputComponent.quantity += quan;
+                    outputComponent.save();
+                }
                 res.json({success: true, message: "Component updated successfully"});
             }
         }
