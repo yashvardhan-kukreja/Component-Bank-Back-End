@@ -207,8 +207,9 @@ router.post('/addComponents', function(req, res) {
                     res.json({success:false, message:"Quantity of components going below 0"});
                     outputComponent.quantity += quan;
                     outputComponent.save();
+                } else {
+                    res.json({success: true, message: "Component updated successfully"});
                 }
-                res.json({success: true, message: "Component updated successfully"});
             }
         }
     });
