@@ -192,10 +192,40 @@ router.post('/return', function(req, res){
 });
 
 //Adding more number of already existing components
+router.post('/addComponents', function(req, res){
+    var compId = req.body.id;
+    var quan = parseInt(req.body.quantity);
+    Component.findOne({_id:compId}, function(err, outputComponent){
+        if (err){
+            console.log(err);
+            res.json({success: false, message: "An error occured"});
+        } else {
+            if (!outputComponent){
+                res.json({success: false, message: "No such component exists"});
+            } else {
+                if (outputComponent.quantity - (quan) < 0){
+                    res.json({success: false, message: "Quantity of component going below 0"});
+                } else {
+                    outputComponent.quantity += quan;
+                    outputComponent.save(function(err){
+                        if (err){
+                            console.log(err);
+                            res.json({success: false, message: "An error occured"});
+                        } else {
+                            res.json({success: true, message: "Component updated successfully"});
+                        }
+                    });
+                }
+            }
+        }
+    });
+});
+
+/*
 router.post('/addComponents', function(req, res) {
     var compId = req.body.id;
     var quan = parseInt(req.body.quantity);
-    Component.findOneAndUpdate({_id: compId}, {$inc: {quantity: quan}}, function (err, outputComponent) {
+    Component.findOne({_id: compId}, function (err, outputComponent) {
         if (err) {
             console.log(err);
             res.json({success: false, message: "An error occured"});
@@ -213,7 +243,7 @@ router.post('/addComponents', function(req, res) {
             }
         }
     });
-});
+});*/
 
 //Route for getting the list of all the requests or issuers
 /** Route => /requests   **/ //For getting the list of all the requests for components
