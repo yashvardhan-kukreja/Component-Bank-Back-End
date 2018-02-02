@@ -221,30 +221,6 @@ router.post('/addComponents', function(req, res){
     });
 });
 
-/*
-router.post('/addComponents', function(req, res) {
-    var compId = req.body.id;
-    var quan = parseInt(req.body.quantity);
-    Component.findOne({_id: compId}, function (err, outputComponent) {
-        if (err) {
-            console.log(err);
-            res.json({success: false, message: "An error occured"});
-        } else {
-            if (!outputComponent)
-                res.json({success: false, message: "No such component exists"});
-            else {
-                if (outputComponent.quantity < 0){
-                    res.json({success:false, message:"Quantity of components going below 0"});
-                    outputComponent.quantity += quan;
-                    outputComponent.save();
-                } else {
-                    res.json({success: true, message: "Component updated successfully"});
-                }
-            }
-        }
-    });
-});*/
-
 //Route for getting the list of all the requests or issuers
 /** Route => /requests   **/ //For getting the list of all the requests for components
 /** Route => /issuers   **/ // For getting the list of all the users who have issued component but not returned

@@ -2,17 +2,18 @@
  * Created by Yash 1300 on 06-01-2018.
  */
 
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt-nodejs');
 
-var Member = require('./models/member');
-var Transaction = require('./models/transaction');
+const Member = require('./models/member');
+const Transaction = require('./models/transaction');
 
+const secretKey = process.env.SECRET;
 // Creating the function for verifying a token
 function checkToken(req, res, next){
     var token = req.body.token || req.headers['x-access-token'];
     if (token) {
-        jwt.verify(token, 'secret', function(err, decoded){
+        jwt.verify(token, secretKey, function(err, decoded){
             if (err){
                 return res.json({success: false, message: "An error occured"});
             } else {
@@ -46,7 +47,7 @@ function authenticate(req, res, next){
                     } else {
 
                         // Creating a token and assigning it to header
-                        var token = jwt.sign(JSON.parse(JSON.stringify(outputMember)), 'secret');
+                        var token = jwt.sign(JSON.parse(JSON.stringify(outputMember)), secretKey);
                         res.header("Set-Cookie","x-access-token="+token);
 
                         //Finding all the transactions with returned != "1"

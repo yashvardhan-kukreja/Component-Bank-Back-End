@@ -12,10 +12,10 @@ const authenticateRoutes = require('./routes/authenticateRoutes');
 
 const port = process.env.PORT || 8000;
 
-const db = "mongodb://ieee:ieee@ds247587.mlab.com:47587/componentbank";
+const database = process.env.DATABASE;
 
 // Connecting the database and making sure that the server runs only if the database connects successfully
-mongoose.connect(db, function(err){
+mongoose.connect(database, function(err){
     if (err)
         console.log("Error while connecting to the database");
     else {
