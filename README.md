@@ -1,2 +1,2 @@
 # Component Bank Back End
-Back end server side code for Component Bank App in NodeJS
+Back end server side code in NodeJS for Component Bank App
