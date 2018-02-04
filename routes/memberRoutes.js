@@ -39,7 +39,7 @@ router.post('/requestComponent', function(req, res){
             res.json({success: false, message: "An error occured"});
         } else {
             if (!outputMember)
-                res.json({success: false, message: "No user exists with the following details", id:req.decoded._id});
+                res.json({success: false, message: "No user exists with the following details"});
             else{
                 var newTransaction = new Transaction({
                     componentId: compId,
@@ -65,7 +65,7 @@ router.post('/requestComponent', function(req, res){
 });
 
 //Route for getting the list of all components
-router.post('/getAllComponents', function(req, res){
+router.get('/getAllComponents', function(req, res){
     Component.find().populate({path:'_id', select: ["name", "quantity", "value"]}).exec(function(err, outputComponents){
         if (err){
             console.log(err);
@@ -101,7 +101,7 @@ router.post('/getIssuers', function(req, res){
 /** Route => /getIssuedComponents   **/ //For getting the list of components issued by the user but not returned
 /** Route => /getHistory   **/ // For getting the list of components returned by the user successfully
 /** Route => /getRequestedComponents   **/ //For getting the list of components requested by the user but not approved by the admin
-router.post('/:route', function(req, res){
+router.get('/:route', function(req, res){
     var endpoint = req.params.route;
     var returnedStatus = "";
     if (endpoint === "getIssuedComponents")

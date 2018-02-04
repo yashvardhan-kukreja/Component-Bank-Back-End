@@ -9,6 +9,7 @@ const Member = require('./models/member');
 const Transaction = require('./models/transaction');
 
 const secretKey = process.env.SECRET;
+
 // Creating the function for verifying a token
 function checkToken(req, res, next){
     var token = req.body.token || req.headers['x-access-token'];
