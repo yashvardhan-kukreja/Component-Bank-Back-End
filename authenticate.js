@@ -2,10 +2,10 @@
  * Created by Yash 1300 on 06-01-2018.
  */
 
-const jwt = require('jsonwebtoken');
+const jwt    = require('jsonwebtoken');
 const bcrypt = require('bcrypt-nodejs');
 
-const Member = require('./models/member');
+const Member      = require('./models/member');
 const Transaction = require('./models/transaction');
 
 const secretKey = process.env.SECRET;

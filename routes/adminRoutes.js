@@ -2,12 +2,12 @@
  * Created by Yash 1300 on 29-12-2017.
  */
 
-const express = require('express');
-const Member = require('../models/member');
-const Component = require('../models/component');
-const Transaction = require('../models/transaction');
+const express      = require('express');
+const Member       = require('../models/member');
+const Component    = require('../models/component');
+const Transaction  = require('../models/transaction');
 const authenticate = require('../authenticate');
-const router = express.Router();
+const router       = express.Router();
 
 //Checking the token before executing any route
 router.use(function(req, res, next){

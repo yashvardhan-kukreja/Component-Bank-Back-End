@@ -2,10 +2,10 @@
  * Created by Yash 1300 on 07-01-2018.
  */
 
-const express = require('express');
-const Member = require('../models/member');
+const express      = require('express');
+const Member       = require('../models/member');
 const authenticate = require('../authenticate');
-const router = express.Router();
+const router       = express.Router();
 
 
 //Route for registering a user
