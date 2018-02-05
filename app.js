@@ -29,8 +29,8 @@ mongoose.connect(database, function(err){
         app.use(bodyParser.urlencoded({extended:true}));
         
         // Secures Express Apps by setting various HTTP headers
-        app.use(helmet());'
-        //Requests that pass through the middleware will be compressed
+        app.use(helmet());
+        // Requests that pass through the middleware will be compressed
         app.use(compression());
         
         // Attaching the routes with server
