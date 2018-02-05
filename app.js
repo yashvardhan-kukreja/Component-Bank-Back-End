@@ -1,13 +1,14 @@
 /**
  * Created by Yash 1300 on 29-12-2017.
  */
-const mongoose = require('mongoose');
-const express = require('express');
-const bodyParser = require('body-parser');
-const logger = require('morgan');
-const app = express();
-const memberRoutes = require('./routes/memberRoutes');
-const adminRoutes = require('./routes/adminRoutes');
+const mongoose           = require('mongoose');
+const express            = require('express');
+const bodyParser         = require('body-parser');
+const logger             = require('morgan');
+const helmet             = require('helmet');
+const app                = express();
+const memberRoutes       = require('./routes/memberRoutes');
+const adminRoutes        = require('./routes/adminRoutes');
 const authenticateRoutes = require('./routes/authenticateRoutes');
 
 const port = process.env.PORT || 8000;
@@ -25,6 +26,9 @@ mongoose.connect(database, function(err){
         app.use(logger('dev'));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended:true}));
+        
+        // Secures Express Apps by setting various HTTP headers
+        app.use(helmet());
 
         // Attaching the routes with server
         app.use('/authenticate', authenticateRoutes);
