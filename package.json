@@ -12,10 +12,11 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
     "express": "^4.16.2",
+    "helmet": "^3.10.0",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.12.4",
-    "helmet": "^3.10.0",
     "morgan": "^1.9.0"
   }
 }

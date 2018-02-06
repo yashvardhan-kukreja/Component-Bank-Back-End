@@ -6,8 +6,8 @@ const express            = require('express');
 const bodyParser         = require('body-parser');
 const logger             = require('morgan');
 const helmet             = require('helmet');
-const app                = express();
 const compression        = require('compression');
+const app                = express();
 const memberRoutes       = require('./routes/memberRoutes');
 const adminRoutes        = require('./routes/adminRoutes');
 const authenticateRoutes = require('./routes/authenticateRoutes');
@@ -30,6 +30,7 @@ mongoose.connect(database, function(err){
         
         // Secures Express Apps by setting various HTTP headers
         app.use(helmet());
+        
         // Requests that pass through the middleware will be compressed
         app.use(compression());
         
