@@ -30,7 +30,7 @@ mongoose.connect(database, function(err){
         
         // Secures Express Apps by setting various HTTP headers
         app.use(helmet());
-        
+
         // Requests that pass through the middleware will be compressed
         app.use(compression());
         

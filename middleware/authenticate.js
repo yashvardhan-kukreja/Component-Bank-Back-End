@@ -5,8 +5,8 @@
 const jwt    = require('jsonwebtoken');
 const bcrypt = require('bcrypt-nodejs');
 
-const Member      = require('./models/member');
-const Transaction = require('./models/transaction');
+const Member      = require('../models/member');
+const Transaction = require('../models/transaction');
 
 const secretKey = process.env.SECRET;
 

@@ -5,7 +5,7 @@ const express      = require('express');
 const Member       = require('../models/member');
 const Component    = require('../models/component');
 const Transaction  = require('../models/transaction');
-const Authenticate = require('../authenticate');
+const Authenticate = require('../middleware/authenticate');
 const router       = express.Router();
 
 router.use(function(req, res, next){

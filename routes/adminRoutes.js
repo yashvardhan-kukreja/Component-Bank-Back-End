@@ -6,7 +6,7 @@ const express      = require('express');
 const Member       = require('../models/member');
 const Component    = require('../models/component');
 const Transaction  = require('../models/transaction');
-const authenticate = require('../authenticate');
+const authenticate = require('../middleware/authenticate');
 const router       = express.Router();
 
 //Checking the token before executing any route
