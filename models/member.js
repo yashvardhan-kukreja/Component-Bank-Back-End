@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+var validate = require('mongoose-validator');   // Import Mongoose Validator Plugin
 var vali     = require('./validation');
 
 
