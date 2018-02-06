@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var validate = require('mongoose-validator');   // Import Mongoose Validator Plugin
 
 // User E-mail Validator
-//
 const emailValidator = [
         validate({
             validator: 'matches',

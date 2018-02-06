@@ -1,10 +1,5 @@
-/**
- * Created by Yash 1300 on 29-12-2017.
- */
-
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-var validate = require('mongoose-validator');   // Import Mongoose Validator Plugin
 var vali     = require('./validation');
 
 
@@ -42,7 +37,8 @@ var MemberSchema = new mongoose.Schema({
 
     isAdmin:    {
         type:String ,
-        default:"0" }// 0 means that the user is a normal user. 1 means that the user is an ADMIN
+        default:"0" }
+        // 0 means that the user is a normal user. 1 means that the user is an ADMIN
 
 });
 
