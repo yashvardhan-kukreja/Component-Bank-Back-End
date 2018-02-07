@@ -80,7 +80,7 @@ router.post('/authorize', function(req, res){
 });
 
 //Route for the list of unauthorized users
-router.get('/unauthorizedUsers', function(req, res){
+router.post('/unauthorizedUsers', function(req, res){
     Member.find({authorized:false}, function(err, outputMembers){
         if (err){
             console.log(err);
@@ -224,7 +224,7 @@ router.post('/addComponents', function(req, res){
 //Route for getting the list of all the requests or issuers
 /** Route => /requests   **/ //For getting the list of all the requests for components
 /** Route => /issuers   **/ // For getting the list of all the users who have issued component but not returned
-router.get('/:route', function(req, res){
+router.post('/:route', function(req, res){
     var endpoint = req.params.route;
     var returnedStatus = "";
     if (endpoint === 'issuers')

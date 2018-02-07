@@ -65,7 +65,7 @@ router.post('/requestComponent', function(req, res){
 });
 
 //Route for getting the list of all components
-router.get('/getAllComponents', function(req, res){
+router.post('/getAllComponents', function(req, res){
     Component.find().populate({path:'_id', select: ["name", "quantity", "value"]}).exec(function(err, outputComponents){
         if (err){
             console.log(err);
@@ -101,7 +101,7 @@ router.post('/getIssuers', function(req, res){
 /** Route => /getIssuedComponents   **/ //For getting the list of components issued by the user but not returned
 /** Route => /getHistory   **/ // For getting the list of components returned by the user successfully
 /** Route => /getRequestedComponents   **/ //For getting the list of components requested by the user but not approved by the admin
-router.get('/:route', function(req, res){
+router.post('/:route', function(req, res){
     var endpoint = req.params.route;
     var returnedStatus = "";
     if (endpoint === "getIssuedComponents")
