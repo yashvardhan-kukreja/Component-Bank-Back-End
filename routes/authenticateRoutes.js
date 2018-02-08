@@ -30,7 +30,7 @@ router.post('/register', function(req, res){
             if (err.code == 11000)      // Error code 11000 means that error occured due to duplication of some value
                 res.json({success: false, message: "A user with same email or reg num already exists"});
             else
-                res.json({success: false, message: err.errors._message});
+                res.json({success: false, message: err.errors.message});
         } else {
             res.json({success: true, message: "Registered successfully"});
         }
