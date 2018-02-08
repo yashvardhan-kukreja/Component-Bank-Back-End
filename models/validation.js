@@ -1,11 +1,10 @@
-var mongoose = require('mongoose');
 var validate = require('mongoose-validator');   // Import Mongoose Validator Plugin
 
 // User E-mail Validator
 const emailValidator = [
         validate({
             validator: 'matches',
-            arguments: /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/,
+            arguments: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
             message: 'Name must be at least 3 characters, max 50, no special characters or numbers, must have space in between name.'
         }),
         validate({
@@ -20,7 +19,7 @@ const emailValidator = [
 const phoneValidator = [
     validate({
         validator: 'matches',
-        arguments: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+        arguments: /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/,
         message: 'Not a correct phone number'
     }),
     validate({
@@ -34,7 +33,7 @@ const phoneValidator = [
 const regValidator = [
     validate({
         validator: 'matches',
-        arguments: /^\d{2}[A-Z]{3}\d{3,4}$/,
+        arguments: /^[1-2]{1}[4-9]{1}[A-Z]{3}[0-9]{4}$/,
         message: 'Not a correct registration number'
     }),
     validate({

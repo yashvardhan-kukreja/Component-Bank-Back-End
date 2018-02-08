@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-var validate = require('mongoose-validator');   // Import Mongoose Validator Plugin
 var vali     = require('./validation');
 
 
@@ -8,38 +7,44 @@ var MemberSchema = new mongoose.Schema({
     name:{
         type:String ,
         required: true,
-        validate:vali.nameValidator},
+        validate:vali.nameValidator
+    },
 
-    regno:      {
+    regno:{
         type:String ,
         required: true,
         unique:true,
-        validate: vali.regValidator},
+        validate: vali.regValidator
+    },
 
-    email:      {
+    email:{
         type:String ,
         required: true,
         unique:true,
         lowercase: true,
-        validate: vali.emailValidator },
+        validate: vali.emailValidator
+    },
 
-    password:   {
+    password:{
         type:String ,
-        required: true},
+        required: true
+    },
 
-    phoneno:    {
+    phoneno:{
         type:String ,
         required: true,
-        validate:vali.phoneValidator},
+        validate:vali.phoneValidator
+    },
 
-    authorized: {
+    authorized:{
         type:Boolean,
-        default : false},
+        default : false
+    },
 
-    isAdmin:    {
+    isAdmin:{
         type:String ,
-        default:"0" }
-        // 0 means that the user is a normal user. 1 means that the user is an ADMIN
+        default:"0"
+    }        // 0 means that the user is a normal user. 1 means that the user is an ADMIN
 
 });
 

@@ -12,7 +12,7 @@ const memberRoutes       = require('./routes/memberRoutes');
 const adminRoutes        = require('./routes/adminRoutes');
 const authenticateRoutes = require('./routes/authenticateRoutes');
 
-const port = process.env.PORT || 3300;
+const port = process.env.PORT || 8000;
 
 const database = process.env.DATABASE;
 

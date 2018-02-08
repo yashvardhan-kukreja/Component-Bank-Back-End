@@ -77,5 +77,12 @@ function authenticate(req, res, next){
     });
 }
 
+function adminCheck(req, res, next){
+    if (req.decoded.isAdmin === "0")
+        res.json({success: false, message: "You don't have admin privileges"});
+    else
+        next();
+}
+
 // Exporting the functions
-module.exports = {authenticate: authenticate, checkToken: checkToken};
+module.exports = {authenticate: authenticate, checkToken: checkToken, adminCheck: adminCheck};

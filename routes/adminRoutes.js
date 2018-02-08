@@ -14,6 +14,11 @@ router.use(function(req, res, next){
     authenticate.checkToken(req, res, next);
 });
 
+// Checking if the user really is an ADMIN
+router.use(function(req, res, next){
+    authenticate.adminCheck(req, res, next);
+});
+
 
 //Route for registering a component
 router.post('/registerComponent', function(req, res){
