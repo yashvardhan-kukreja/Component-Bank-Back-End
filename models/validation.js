@@ -59,8 +59,8 @@ const nameValidator = [
 ];
 
 module.exports={
-    nameValidator,
-    phoneValidator,
-    emailValidator,
-    regValidator
+    nameValidator: nameValidator,
+    phoneValidator: phoneValidator,
+    emailValidator: emailValidator,
+    regValidator: regValidator
 };

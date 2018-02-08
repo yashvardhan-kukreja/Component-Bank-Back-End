@@ -24,8 +24,20 @@ router.post('/register', function(req, res){
         phoneno: req.body.phoneno
     });
 
+    newMember.save(function(err){
+        if (err){
+            console.log(err);
+            if (err.code == 11000)      // Error code 11000 means that error occured due to duplication of some value
+                res.json({success: false, message: "A user with same email or reg num already exists"});
+            else
+                res.json({success: false, message: "An error occured"});
+        } else {
+            res.json({success: true, message: "Registered successfully"});
+        }
+    });
+
     // Comparing the regex with values in the request body
-    if (!regnoRegex.test(req.body.regno)){
+    /*if (!regnoRegex.test(req.body.regno)){
         res.json({success: false, message: "Enter a valid registration number"});
     } else if (!emailRegex.test(newMember.email)){
         res.json({success: false, message: "Enter a valid E-mail ID"});
@@ -45,7 +57,7 @@ router.post('/register', function(req, res){
                 res.json({success: true, message: "Registered successfully"});
             }
         });
-    }
+    } */
 });
 
 //Route for authenticating a user
