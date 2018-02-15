@@ -6,8 +6,7 @@ var vali     = require('./validation');
 var MemberSchema = new mongoose.Schema({
     name:{
         type:String ,
-        required: true,
-        validate:vali.nameValidator
+        required: true
     },
 
     regno:{
