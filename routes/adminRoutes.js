@@ -8,6 +8,7 @@ const Component    = require('../models/component');
 const Transaction  = require('../models/transaction');
 const authenticate = require('../middleware/authenticate');
 const router       = express.Router();
+const Promise = require('bluebird');
 
 //Checking the token before executing any route
 router.use(function(req, res, next){

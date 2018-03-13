@@ -75,8 +75,6 @@ router.post('/getAllComponents', function(req, res){
     });
 });
 
-
-
 //Route for getting the list of all the user issuing a specific component and also the details of the component
 router.post('/getIssuers', function(req, res){
     var compId = req.body.id; //Object ID of the component for which issuers are to be found
@@ -101,7 +99,7 @@ router.post('/getIssuers', function(req, res){
 /** Route => /getIssuedComponents   **/ //For getting the list of components issued by the user but not returned
 /** Route => /getHistory   **/ // For getting the list of components returned by the user successfully
 /** Route => /getRequestedComponents   **/ //For getting the list of components requested by the user but not approved by the admin
-router.post('/:route', function(req, res){
+router.post('/:route', function(req, res) {
     var endpoint = req.params.route;
     var returnedStatus = "";
     if (endpoint === "getIssuedComponents")
@@ -115,21 +113,28 @@ router.post('/:route', function(req, res){
     if (returnedStatus === "")
         res.json({success: false, message: "Wrong endpoint entered!!!"});
     else {
-        Member.findOne({_id: req.decoded._id}, function(err, outputMember){
-            if (err){
+        Member.findOne({_id: req.decoded._id}, function (err, outputMember) {
+            if (err) {
                 console.log(err);
-                res.json({success: false, message:"An error occured"});
+                res.json({success: false, message: "An error occured"});
             } else {
                 if (!outputMember)
                     res.json({success: false, message: "No such member exists with given email"});
-                else{
+                else {
                     //Finding all the transactions of the current user in which he has issued the component but has not returned them
-                    Transaction.find({memberId:outputMember._id, returned:returnedStatus}, function(err, outputTransactions){
-                        if (err){
+                    Transaction.find({
+                        memberId: outputMember._id,
+                        returned: returnedStatus
+                    }, function (err, outputTransactions) {
+                        if (err) {
                             console.log(err);
-                            res.json({success:false, message:"An error occured"});
+                            res.json({success: false, message: "An error occured"});
                         } else {
-                            res.json({success: true, message:"Got all the components on the basis of the route", components:outputTransactions});
+                            res.json({
+                                success: true,
+                                message: "Got all the components on the basis of the route",
+                                components: outputTransactions
+                            });
                         }
                     });
                 }

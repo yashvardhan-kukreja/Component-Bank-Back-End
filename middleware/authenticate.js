@@ -79,7 +79,7 @@ function authenticate(req, res, next){
 
 function adminCheck(req, res, next){
     if (req.decoded.isAdmin === "0")
-        res.json({success: false, message: "You don't have admin privileges"});
+        return res.json({success: false, message: "You don't have admin privileges"});
     else
         next();
 }
